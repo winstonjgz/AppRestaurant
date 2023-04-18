@@ -1,0 +1,93 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h2>App Registro Restaurant</h2>
+        <div class="d-flex">
+            <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" (click)="clickAgregarRest()">
+                Agregar
+            </button>
+            <button routerLink='/login' class="btn btn-danger mx3">Salir</button>
+        </div>
+    </div>
+</nav>
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <h1 class="display-5 fw-bold">
+        Administración de registros del Restaurant:
+    </h1>
+</div>
+
+<table class="table mt-4">
+    <thead>
+        <tr>
+            <th scope="col">ID Restaurant: </th>
+            <th scope="col">Nombre: </th>
+            <th scope="col">Email: </th>
+            <th scope="col">Móvil: </th>
+            <th scope="col">Dirección: </th>
+            <th scope="col">Servicio: </th>
+            <th scope="col">Acción: </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of datosRestaurantes">
+            <td>{{data.id}}</td>
+            <td>{{data.nombre}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.movil}}</td>
+            <td>{{data.direccion}}</td>
+            <td>{{data.servicio}}</td>
+            <!-- <td>Sabrosos Food</td>
+            <td>sfood@sabrososfood.com</td>
+            <td>5555555</td>
+            <td>Entre Cordoba y Callao 547</td>
+            <td>Cortado y Tostadas</td> -->
+            <td>
+                <button class="bto btn-info" (click)="actualizarRestaurantReg(data)" data-target="#myModal" data-toggle="modal" ><i class="fa-solid fa-pen-to-square"></i>Editar</button>&nbsp;
+                <button class="bto btn-danger" (click)="borrarRestaurant(data)"><i class="fa-solid fa-eraser"></i>Borrar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Agregar Datos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formValue">
+                    <div class="form-group">
+                        <label >Nombre: </label>
+                        <input type="text" formControlName="nombre"  class="form-control" id="Nombre" placeholder="Agregue nombre del restaurant">
+                    </div>
+                    <div class="form-group">
+                        <label >Email: </label>
+                        <input type="email" formControlName="email" class="form-control" id="email" placeholder="Agregue el email">
+                    </div>
+                    <div class="form-group">
+                        <label >Móvil: </label>
+                        <input type="text" formControlName="movil" class="form-control" id="movil" placeholder="Agregue el móvil">
+                    </div>
+                    <div class="form-group">
+                        <label >Dirección: </label>
+                        <input type="text" formControlName="direccion" class="form-control" id="direccion" placeholder="Agregue la dirección">
+                    </div>
+                    <div class="form-group">
+                        <label >Servicio: </label>
+                        <input type="text" formControlName="servicio" class="form-control" id="servicio" placeholder="Agregue el servicio">
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cerrar</button>
+                <button *ngIf="showAgregarBut" type="button" class="btn btn-primary" (click)="agregarRestaurante()" >Agregar registro</button>
+                <button *ngIf="showButton" type="button" class="btn btn-primary" (click)="actualizarRestaurante()" >Actualizar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
